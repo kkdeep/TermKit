@@ -13,7 +13,7 @@ var http = require('http'),
     router = require("./router.js"),
 	
 	PORT = 2222,
-	WEBROOT = path.join(path.dirname(__filename), 'webroot');
+	WEBROOT = path.join(path.dirname(__filename), '..', 'HTML');
 
 // Load config file.
 var config = require('./config.js').getConfig();

@@ -7,20 +7,21 @@ var termkit = {
 
 // Load requirements.
 var http = require('http'),  
+	path = require('path'),
     io = require('socket.io'),
-    router = require("./router");
+	paperboy = require('paperboy')
+    router = require("./router.js"),
+	
+	PORT = 2222,
+	WEBROOT = path.join(path.dirname(__filename), 'webroot');
 
 // Load config file.
-var config = require('./config').getConfig();
+var config = require('./config.js').getConfig();
 
 // Set up http server.
 var server = http.createServer(function (request, result) { 
-//  result.writeHeader(200, {'Content-Type': 'text/html'}); 
-//  result.writeBody('<h1>TermKit</h1>');
-//  result.finish(); 
-});
-
-server.listen(2222);
+  paperboy.deliver(WEBROOT, request, result);
+}).listen(PORT);
 
 // Set up WebSocket and handlers.
 var ioServer = io.listen(server); 

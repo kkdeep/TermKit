@@ -1,1 +1,1 @@
-../../Node/protocol.js
+../../Node/node_modules/protocol.js

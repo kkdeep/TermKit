@@ -153,7 +153,7 @@ tc.shell.prototype = {
 
       // Filter tokens.
       for (i in command) if (i > limit) (function (token) {
-        if (/^\.\.?$/(token)) {
+        if (token.match(/^\.\.?$/)) {
           // '.' and '..': pass
         }
         else if (/^-[A-Za-z0-9]$/(token)) {

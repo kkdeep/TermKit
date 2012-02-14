@@ -118,7 +118,7 @@ exports.autocomplete.prototype = {
 
     // Trailing slashes.
     function trail(path) {
-      if (!(/\/$/(path))) {
+      if (!(path.match(/\/$/))) {
         path += '/';
       }
       return path;

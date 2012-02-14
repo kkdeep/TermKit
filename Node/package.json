@@ -1,0 +1,9 @@
+{
+	"name": "TermKit",
+	"version": "0.0.1",
+	"dependencies": {
+		"mime": "1.2",
+		"socket.io": "0.8",
+		"paperboy": "0.0"
+	}
+}

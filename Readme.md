@@ -48,10 +48,11 @@ Unfortunately, TermKit currently requires some assembly.
 1. Install the Mac development tools (Xcode and friends).
 2. [Install node.js](https://github.com/joyent/node/wiki/Installation).
 3. If not covered in #2, install npm: `curl http://npmjs.org/install.sh | sh`
-4. Install node-mime: `npm install mime`
-5. Clone the TermKit repository: `git clone https://github.com/unconed/TermKit.git --recursive`
-6. Users of older git versions will need to type: `git submodule update --init`
-7. Run the NodeKit daemon: `cd TermKit/Node; node nodekit.js`
+4. Clone the TermKit repository: `git clone https://github.com/unconed/TermKit.git --recursive`
+5. Users of older git versions will need to type: `git submodule update --init`
+6. Switch into the NodeKit daemon directory: `cd TermKit/Node`
+7. (First time only.) Let npm install modules that NodeKit depends on: `npm install .`
+8. Run the NodeKit daemon: `node nodekit.js`
 
 Mac:
 * Unzip and run the Mac app in Build/TermKit.zip

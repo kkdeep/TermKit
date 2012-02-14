@@ -1,15 +1,14 @@
 var fs = require('fs'),
-    meta = require('shell/meta'),
-    view = require('view/view'),
-    asyncCallback = require('misc').asyncCallback;
-    async = require('misc').async,
-    extend = require('misc').extend,
-    JSONPretty = require('misc').JSONPretty,
-    composePath = require('misc').composePath,
-    objectKeys = require('misc').objectKeys,
-    reader = require('shell/reader'),
-    escapeBinary = require('misc').escapeBinary,
-    escapeUnixText = require('misc').escapeUnixText;
+    meta = require('./meta'),
+    view = require('../view/view'),
+    asyncCallback = require('../misc').asyncCallback;
+    async = require('../misc').async,
+    extend = require('../misc').extend,
+    path = require('path'),
+    objectKeys = require('../misc').objectKeys,
+    reader = require('./reader'),
+    escapeBinary = require('../misc').escapeBinary,
+    escapeUnixText = require('../misc').escapeUnixText;
 
 /**
  * Error logger.
@@ -226,7 +225,7 @@ exports.plugins.code.prototype = extend(new exports.plugins.text(), {
   data: function (data) {
     data = data.toString('utf-8');
     if (this.headers.get('Content-Type') == 'application/json') {
-      data = JSONPretty(data);
+      data = JSON.stringify(typeof data === 'string' ? JSON.parse(data) : data, null, '  ');
     }
     this.out.update('output', { contents: data }, true);
   },
@@ -339,15 +338,15 @@ exports.plugins.files.prototype = extend(new exports.plugin(), {
 
     // Iterate over each list.
     var set = 0, j;
-    for (key in data) (function (files, path) {
+    for (key in data) (function (files, filePath) {
 
       // Prepare files.
       for (j in files) (function (file, i, j) {
 
         // Stat each file.
-        fs.stat(composePath(file, path), track(function (error, stats) {
+        fs.stat(path.join(filePath, file), track(function (error, stats) {
           if (!error) {
-            output[i][j] = view.file(null, file, path, stats);
+            output[i][j] = view.file(null, file, filePath, stats);
           }
           else {
             errors++;

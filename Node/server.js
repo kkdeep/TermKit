@@ -10,7 +10,7 @@ var http = require('http'),
 	path = require('path'),
     io = require('socket.io'),
 	paperboy = require('paperboy')
-    router = require('router'),
+    router = require('./router'),
 	
 	PORT = 2222,
 	WEBROOT = path.join(path.dirname(__filename), '..', 'HTML');

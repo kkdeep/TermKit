@@ -3,7 +3,7 @@
 //require.paths.unshift(__dirname);
 //require.paths.unshift(__dirname + '/..');
 
-var processor = require('shell/processor');
+var processor = require('./processor');
 
 // Change to home directory.
 process.chdir(process.env.HOME);

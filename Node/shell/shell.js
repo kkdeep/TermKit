@@ -2,7 +2,7 @@ var fs = require('fs'), net = require('net');
 
 var child_process = require('child_process');
 
-var config = require('../../config').getConfig();
+var config = require('../config').getConfig();
 
 /**
  * Interface to shell worker.
@@ -19,14 +19,12 @@ exports.shell = function (args, router) {
   var that = this;
 
   // Extract location of source.
-  var p, path = process.argv[1].split('/');
-  path[path.length - 1] = 'node_modules/shell/worker.js';
-  path = path.join('/');
+  var p;
   
   // Determine user identity.
   if (user == process.env.USER) {
     // Spawn regular worker.
-    p = this.process = child_process.fork(path, [], {
+    p = this.process = child_process.fork('shell/worker.js', [], {
       env: process.env,
       cwd: process.cwd(),
     });
